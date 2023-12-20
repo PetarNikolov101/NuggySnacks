@@ -28,9 +28,6 @@ class Ovoshje(Sprite):
     def update(self):
         self.rect.x += self.speed  
         self.image.set_colorkey((121, 211, 239))
-        # Check if the fruit is outside the screen boundaries and kill it
-        if (self.speed > 0 and self.rect.right < 0) or (self.speed < 0 and self.rect.left > self.screen_rect.right):
-            self.is_outside_screen = True
             
 
             

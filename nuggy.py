@@ -38,9 +38,6 @@ class Nuggy(Sprite):
                 neg = -1
             self.rect.y -= (self.jump_count ** 2) * 0.5 * neg
             self.jump_count -= 1
-
-            # Ensure the character stays within the screen boundaries
-            # self.rect.y = max(self.rect.y, 0)
         else:
             # If jump_count is less than -self.jump_height, stop jumping
             self.is_jumping = False
