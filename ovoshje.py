@@ -2,7 +2,6 @@ import pygame
 from pygame.sprite import Sprite
 import random
 from settings import Settings
-import sys
 
 class Ovoshje(Sprite):
     def __init__(self, bomnigaem):
@@ -27,7 +26,7 @@ class Ovoshje(Sprite):
         self.x = float(self.rect.x)  
            
     def update(self):
-        self.rect.x += self.speed  # Move horizontally based on x_speed
+        self.rect.x += self.speed  
         self.image.set_colorkey((121, 211, 239))
         # Check if the fruit is outside the screen boundaries and kill it
         if (self.speed > 0 and self.rect.right < 0) or (self.speed < 0 and self.rect.left > self.screen_rect.right):

@@ -5,7 +5,6 @@ from nuggy import Nuggy
 from ovoshje import Ovoshje
 import random
 import pygame.font
-from platform_1 import Platforms
         
 class Bomni:
     def __init__(self):
@@ -25,14 +24,6 @@ class Bomni:
         self.createFruits()
         self.ovoshje_speed = self.settings.ovoshe_speed
         
-        self.platform1 = Platforms()
-        self.platform2 = Platforms()
-
-        # Position the platforms in the middle of the screen
-        self.platform1.rect.centerx = self.screen_rect.centerx - 230
-        self.platform1.rect.centery = self.screen_rect.centery - 150  
-        self.platform2.rect.centerx = self.screen_rect.centerx + 230
-        self.platform2.rect.centery = self.screen_rect.centery + 150  
       
     def collect_fruit(self):
         fruit_collisions = pygame.sprite.spritecollide(self.nuggy, self.ovoshje_grupa, True)
@@ -55,12 +46,12 @@ class Bomni:
             fruit_height = fruit.rect.height
 
             if side == 'left':
-                fruit.speed = abs(self.ovoshje_speed)  # Set the initial speed based on the chosen side
+                fruit.speed = abs(self.ovoshje_speed)  
                 fruit.x = 0 - fruit_width
                 fruit.rect.x = fruit.x
                 fruit.rect.y = random.randint(0, self.settings.screen_height - fruit_height)
             elif side == 'right':
-                fruit.speed = -abs(self.ovoshje_speed)  # Set the initial speed based on the chosen side
+                fruit.speed = -abs(self.ovoshje_speed)  
                 fruit.x = self.settings.screen_width
                 fruit.rect.x = fruit.x
                 fruit.rect.y = random.randint(0, self.settings.screen_height - fruit_height)
@@ -81,10 +72,8 @@ class Bomni:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                    self.nuggy.rect.x += 12
                     self.nuggy.movingRight = True
                 if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                    self.nuggy.rect.x -= 12
                     self.nuggy.movingLeft = True
                 if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
                     self.nuggy.start_jump()
@@ -93,26 +82,11 @@ class Bomni:
                     self.nuggy.movingRight = False
                 if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     self.nuggy.movingLeft = False
-                    
-    def check_collisions(self):    
-        for platform in [self.platform1, self.platform2]:
-            if (
-            self.nuggy.rect.bottom <= platform.rect.bottom
-            and self.nuggy.rect.bottom >= platform.rect.top
-            and self.nuggy.rect.right > platform.rect.left
-            and self.nuggy.rect.left < platform.rect.right
-        ):
-                self.nuggy.rect.bottom = platform.rect.top
-                self.nuggy.jump_count = 0  # Stop vertical movement
-                self.nuggy.is_jumping = False  
                                                                                   
     def _update_screen(self):
         self.nuggy.blitme()
         self.ovoshje_grupa.draw(self.screen)
         self.show_score()
-        self.screen.blit(self.platform1.image, self.platform1.rect)
-        self.screen.blit(self.platform2.image, self.platform2.rect)
-
         pygame.display.flip()
 
     def run_game(self):
@@ -122,13 +96,12 @@ class Bomni:
             self._check_events()
             self.nuggy.update()
             self.collect_fruit()    
-            self.check_collisions()
             self.ovoshje_grupa.update()
             self._update_screen()
             
     
 if __name__ == '__main__':
     bomni = Bomni()
-    bomni.run_game()   
+    bomni.run_game()    
         
     
