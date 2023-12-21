@@ -30,16 +30,14 @@ class Nuggy(Sprite):
         if self.movingLeft and self.rect.left > 0:
             self.rect.x -= self.speed
 
-    
     def jump(self):
         if self.jump_count >= -self.jump_height:
             neg = 1
-            if self.jump_count < 0:
+            if self.jump_count < 3.1:
                 neg = -1
             self.rect.y -= (self.jump_count ** 2) * 0.5 * neg
             self.jump_count -= 1
         else:
-            # If jump_count is less than -self.jump_height, stop jumping
             self.is_jumping = False
             self.jump_count = self.jump_height
 

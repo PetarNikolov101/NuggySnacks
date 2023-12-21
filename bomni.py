@@ -24,7 +24,8 @@ class Bomni:
         self.createFruits()
         self.ovoshje_speed = self.settings.ovoshe_speed
         
-      
+        self.clock = pygame.time.Clock()
+        
     def collect_fruit(self):
         fruit_collisions = pygame.sprite.spritecollide(self.nuggy, self.ovoshje_grupa, True)
         for fruit in fruit_collisions:
@@ -33,7 +34,7 @@ class Bomni:
             if self.ovoshje_speed < 10:
                 self.ovoshje_speed += 1
             if self.settings.score == 20:
-                self.ovoshje_speed += 4
+                self.ovoshje_speed += 3
             
     def createFruits(self):
     # Check if all fruits in the group are outside the screen
@@ -91,7 +92,7 @@ class Bomni:
 
     def run_game(self):
         while True:
-            pygame.time.delay(17)
+            self.clock.tick(60)
             self.screen.fill(self.settings.bg_color)
             self._check_events()
             self.nuggy.update()
