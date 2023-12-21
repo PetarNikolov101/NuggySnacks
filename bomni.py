@@ -16,6 +16,7 @@ class Bomni:
         self.font = pygame.font.Font(None, 36)
         self.screen.fill(self.settings.bg_color)
         self.screen_rect = self.screen.get_rect()
+        self.background = pygame.image.load('images/pink_background.webp')
          
         self.nuggy = Nuggy(self)
         self.ovoshje = Ovoshje(self)
@@ -93,7 +94,7 @@ class Bomni:
     def run_game(self):
         while True:
             self.clock.tick(60)
-            self.screen.fill(self.settings.bg_color)
+            self.screen.blit(self.background, (0, 0))
             self._check_events()
             self.nuggy.update()
             self.collect_fruit()    
