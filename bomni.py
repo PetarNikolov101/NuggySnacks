@@ -14,7 +14,6 @@ class Bomni:
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Bomni")
         self.font = pygame.font.Font(None, 36)
-        self.screen.fill(self.settings.bg_color)
         self.screen_rect = self.screen.get_rect()
         self.background = pygame.image.load('images/pink_background.webp')
          
