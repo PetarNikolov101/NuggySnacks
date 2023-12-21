@@ -2,7 +2,7 @@ import pygame
 
 class Settings:
     def __init__(self):
-        self.screen_width = 880
+        self.screen_width = 950
         self.screen_height = 639
         self.score = 0
         self.ovoshe_speed = 4
