@@ -15,6 +15,8 @@ class Nuggy(Sprite):
         self.ground = self.settings.screen_height 
         self.rect.midbottom = self.screen_rect.midbottom
         
+        self.jumpsound = pygame.mixer.Sound('sound effects/mixkit-quick-jump-arcade-game-239.wav')
+        
         self.movingRight = False
         self.movingLeft = False
         
@@ -45,6 +47,7 @@ class Nuggy(Sprite):
         if not self.is_jumping:
             self.is_jumping = True
             self.jump_count = self.jump_height
+            pygame.mixer.Sound.play(self.jumpsound)
     
     def blitme(self):
         if not self.movingLeft and not self.movingRight or (self.movingRight and self.movingLeft):
