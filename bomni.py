@@ -16,7 +16,8 @@ class Bomni:
         self.font = pygame.font.Font(None, 36)
         self.screen_rect = self.screen.get_rect()
         self.background = pygame.image.load('images/pink_background.webp')
-         
+        self.collect_sound = pygame.mixer.Sound('sound effects/mixkit-game-ball-tap-2073.wav')
+        self.jumpsound = pygame.mixer.Sound('sound effects/mixkit-quick-jump-arcade-game-239.wav')
         self.nuggy = Nuggy(self)
         self.ovoshje = Ovoshje(self)
         self.ovoshje_grupa = pygame.sprite.Group()
@@ -30,6 +31,7 @@ class Bomni:
         fruit_collisions = pygame.sprite.spritecollide(self.nuggy, self.ovoshje_grupa, True)
         for fruit in fruit_collisions:
             self.settings.score += 1
+            pygame.mixer.Sound.play(self.collect_sound)
             self.createFruits()
             if self.ovoshje_speed < 10:
                 self.ovoshje_speed += 1
@@ -78,6 +80,7 @@ class Bomni:
                     self.nuggy.movingLeft = True
                 if event.key == pygame.K_SPACE or event.key == pygame.K_UP or event.key == pygame.K_w:
                     self.nuggy.start_jump()
+                    pygame.mixer.Sound.play(self.jumpsound)
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     self.nuggy.movingRight = False
