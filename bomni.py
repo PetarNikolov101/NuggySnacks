@@ -36,7 +36,7 @@ class Bomni:
             if self.ovoshje_speed < 10:
                 self.ovoshje_speed += 1
             if self.settings.score == 20:
-                self.ovoshje_speed += 3
+                self.ovoshje_speed += 2
             
     def createFruits(self):
     # Check if all fruits in the group are outside the screen
