@@ -33,10 +33,10 @@ class Bomni:
             self.settings.score += 1
             pygame.mixer.Sound.play(self.collect_sound)
             self.createFruits()
-            if self.ovoshje_speed < 10:
-                self.ovoshje_speed += 1
-            if self.settings.score == 20:
-                self.ovoshje_speed += 2
+            if self.settings.score >= 20:
+                self.ovoshje_speed = random.randrange(10,15)
+            else:
+                self.ovoshje_speed = random.randrange(4, 9)
             
     def createFruits(self):
     # Check if all fruits in the group are outside the screen
