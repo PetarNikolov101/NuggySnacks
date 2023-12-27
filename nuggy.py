@@ -22,7 +22,11 @@ class Nuggy:
         self.is_jumping = False
         self.speed = self.settings.nugget_speed
         self.jump_height = self.settings.nugget_jump_height
+    
+    def reset_position(self):
+        self.rect.midbottom = self.screen_rect.midbottom
         
+            
     def update(self):
         if self.is_jumping:
             self.jump()

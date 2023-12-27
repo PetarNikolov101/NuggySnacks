@@ -64,10 +64,15 @@ class Bomni:
         score_rect.top = 30  # Adjust the top position as needed
         self.screen.blit(score_text, score_rect)
 
+    def reset_game(self):
+        self.settings.score = 0
+        self.nuggy.reset_position()
+        self.ovoshje_grupa.empty()
+        self.createFruits()
+
     def check_restart_button(self, mouse_pos):
         if self.restart_button.rect.collidepoint(mouse_pos):
-            self.settings.score = 0
-            self.run_game()
+            self.reset_game()
                                     
     def _check_events(self):        
         for event in pygame.event.get():
