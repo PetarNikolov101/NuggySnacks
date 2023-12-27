@@ -10,26 +10,24 @@ from button import Button
 class Bomni:
     def __init__(self):
         pygame.init()
-        self.settings = Settings()
-        self.game_active = False
-        
+        self.settings = Settings()    
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Bomni")
         self.font = pygame.font.Font(None, 36)
         self.screen_rect = self.screen.get_rect()
         self.background = pygame.image.load('images/pink_background.webp')
-        self.collect_sound = pygame.mixer.Sound('sound effects/mixkit-game-ball-tap-2073.wav')
-        
+        self.collect_sound = pygame.mixer.Sound('sound effects/mixkit-game-ball-tap-2073.wav')  
+             
         self.restart_button = Button(self, "Restart")
         self.nuggy = Nuggy(self)
         self.ovoshje = Ovoshje(self)
-        self.ovoshje_grupa = pygame.sprite.Group()
-        self.ovoshje_grupa.add(self.ovoshje)
-        self.createFruits()
-        self.ovoshje_speed = self.settings.ovoshe_speed
         
+        self.ovoshje_grupa = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
         
+        self.ovoshje_grupa.add(self.ovoshje)
+        self.ovoshje_speed = self.settings.ovoshe_speed
+               
     def collect_fruit(self):
         fruit_collisions = pygame.sprite.spritecollide(self.nuggy, self.ovoshje_grupa, True)
         for fruit in fruit_collisions:
@@ -40,30 +38,24 @@ class Bomni:
                 self.ovoshje_speed = random.randrange(10,15)
             else:
                 self.ovoshje_speed = random.randrange(4, 9)
-           
-            
-            
+                                 
     def createFruits(self):
-    # Check if all fruits in the group are outside the screen
-        if all(fruit.is_outside_screen for fruit in self.ovoshje_grupa): 
-        # Determine which side of the screen the fruits will appear on
-            side = random.choice(['left', 'right'])
-        
-            fruit = Ovoshje(self)  # Create a new fruit
-            fruit_width = fruit.rect.width
-            fruit_height = fruit.rect.height
+        side = random.choice(['left', 'right'])   
+        fruit = Ovoshje(self)  
+        fruit_width = fruit.rect.width
+        fruit_height = fruit.rect.height
 
-            if side == 'left':
-                fruit.speed = abs(self.ovoshje_speed)  
-                fruit.x = 0 - fruit_width
-                fruit.rect.x = fruit.x
-                fruit.rect.y = random.randint(0, self.settings.screen_height - fruit_height)
-            elif side == 'right':
-                fruit.speed = -abs(self.ovoshje_speed)  
-                fruit.x = self.settings.screen_width
-                fruit.rect.x = fruit.x
-                fruit.rect.y = random.randint(0, self.settings.screen_height - fruit_height)
-            self.ovoshje_grupa.add(fruit)
+        if side == 'left':
+            fruit.speed = abs(self.ovoshje_speed)  
+            fruit.x = 0 - fruit_width
+            fruit.rect.x = fruit.x
+            fruit.rect.y = random.randint(0, self.settings.screen_height - fruit_height)
+        elif side == 'right':
+            fruit.speed = -abs(self.ovoshje_speed)  
+            fruit.x = self.settings.screen_width
+            fruit.rect.x = fruit.x
+            fruit.rect.y = random.randint(0, self.settings.screen_height - fruit_height)
+        self.ovoshje_grupa.add(fruit)
 
     def show_score(self):
         score_text = self.font.render(f"Score: {self.settings.score}", True, (0, 0, 0))
@@ -74,10 +66,9 @@ class Bomni:
 
     def check_play_button(self, mouse_pos):
         if self.restart_button.rect.collidepoint(mouse_pos):
-            self.game_active = True
             self.settings.score = 0
-            self.createFruits()
-                        
+            self.run_game()
+                                    
     def _check_events(self):        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -115,8 +106,7 @@ class Bomni:
             self.collect_fruit()    
             self.ovoshje_grupa.update()
             self._update_screen()
-            
-    
+               
 if __name__ == '__main__':
     bomni = Bomni()
     bomni.run_game()    
