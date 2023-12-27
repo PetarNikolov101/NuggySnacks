@@ -12,7 +12,7 @@ class Bomni:
         pygame.init()
         self.settings = Settings()    
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("Bomni")
+        pygame.display.set_caption("Nuggy Snacks")
         self.font = pygame.font.Font(None, 36)
         self.screen_rect = self.screen.get_rect()
         self.background = pygame.image.load('images/pink_background.webp')
@@ -64,7 +64,7 @@ class Bomni:
         score_rect.top = 30  # Adjust the top position as needed
         self.screen.blit(score_text, score_rect)
 
-    def check_play_button(self, mouse_pos):
+    def check_restart_button(self, mouse_pos):
         if self.restart_button.rect.collidepoint(mouse_pos):
             self.settings.score = 0
             self.run_game()
@@ -88,7 +88,7 @@ class Bomni:
                     self.nuggy.movingLeft = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                self.check_play_button(mouse_pos)
+                self.check_restart_button(mouse_pos)
                                                                                   
     def _update_screen(self):        
         self.restart_button.draw_button()
