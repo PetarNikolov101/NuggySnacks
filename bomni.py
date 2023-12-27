@@ -5,11 +5,13 @@ from nuggy import Nuggy
 from ovoshje import Ovoshje
 import random
 import pygame.font
+from button import Button
         
 class Bomni:
     def __init__(self):
         pygame.init()
         self.settings = Settings()
+        self.game_active = False
         
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Bomni")
@@ -18,6 +20,7 @@ class Bomni:
         self.background = pygame.image.load('images/pink_background.webp')
         self.collect_sound = pygame.mixer.Sound('sound effects/mixkit-game-ball-tap-2073.wav')
         
+        self.restart_button = Button(self, "Restart")
         self.nuggy = Nuggy(self)
         self.ovoshje = Ovoshje(self)
         self.ovoshje_grupa = pygame.sprite.Group()
@@ -37,10 +40,12 @@ class Bomni:
                 self.ovoshje_speed = random.randrange(10,15)
             else:
                 self.ovoshje_speed = random.randrange(4, 9)
+           
+            
             
     def createFruits(self):
     # Check if all fruits in the group are outside the screen
-        if all(fruit.is_outside_screen for fruit in self.ovoshje_grupa):
+        if all(fruit.is_outside_screen for fruit in self.ovoshje_grupa): 
         # Determine which side of the screen the fruits will appear on
             side = random.choice(['left', 'right'])
         
@@ -67,7 +72,12 @@ class Bomni:
         score_rect.top = 30  # Adjust the top position as needed
         self.screen.blit(score_text, score_rect)
 
-            
+    def check_play_button(self, mouse_pos):
+        if self.restart_button.rect.collidepoint(mouse_pos):
+            self.game_active = True
+            self.settings.score = 0
+            self.createFruits()
+                        
     def _check_events(self):        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -85,8 +95,12 @@ class Bomni:
                     self.nuggy.movingRight = False
                 if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     self.nuggy.movingLeft = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self.check_play_button(mouse_pos)
                                                                                   
-    def _update_screen(self):
+    def _update_screen(self):        
+        self.restart_button.draw_button()
         self.nuggy.blitme()
         self.ovoshje_grupa.draw(self.screen)
         self.show_score()

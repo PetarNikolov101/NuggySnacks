@@ -1,8 +1,7 @@
 import pygame
-from pygame.sprite import Sprite
 from settings import Settings
 
-class Nuggy(Sprite):
+class Nuggy:
     def __init__(self, bomnigaem):       
         self.screen = bomnigaem.screen
         self.screen_rect = bomnigaem.screen_rect
