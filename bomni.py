@@ -13,11 +13,11 @@ class Bomni:
         self.settings = Settings()    
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Nuggy Snacks")
-        self.font = pygame.font.Font(None, 36)
         self.screen_rect = self.screen.get_rect()
         self.background = pygame.image.load('images/pink_background.webp')
         self.collect_sound = pygame.mixer.Sound('sound effects/mixkit-game-ball-tap-2073.wav')  
-             
+        
+        self.font = pygame.font.Font("fonts\\Summer Beauty.otf", 45)     
         self.restart_button = Button(self, "Restart")
         self.nuggy = Nuggy(self)
         self.ovoshje = Ovoshje(self)
