@@ -68,8 +68,9 @@ class Bomni:
         self.settings.score = 0
         self.nuggy.reset_position()
         self.ovoshje_grupa.empty()
+        self.ovoshje_speed = random.randrange(4, 9)
         self.createFruits()
-
+        
     def check_restart_button(self, mouse_pos):
         if self.restart_button.rect.collidepoint(mouse_pos):
             self.reset_game()
