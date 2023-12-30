@@ -14,7 +14,7 @@ cx_Freeze.setup(
                                             "images/lubenche1.bmp",
                                             "images/nuggysit.bmp",
                                             "images/nuggystand_red.bmp",
-                                            "images/pink_background.webp"
+                                            "images/pink_background.webp",
                                             "sound effects/mixkit-game-ball-tap-2073.wav",
                                             "sound effects/mixkit-quick-jump-arcade-game-239.wav",
                                             "button.py",
